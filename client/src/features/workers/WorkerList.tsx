@@ -20,16 +20,7 @@ export const WorkerList = () => {
     return `${Math.floor(seconds)} seconds ago`;
   };
 
-  const averageLastMinute = (record: Worker) => {
-    const lastMinute = record.last_seen > oneMinuteAgo.toISOString();
-    if (!lastMinute) return null;
-    const timeDiffs = record.last_seen_history
-      .filter((dateStr: string) => new Date(dateStr) > oneMinuteAgo)
-      .map((dateStr: string) => now.getTime() - new Date(dateStr).getTime());
-    if (timeDiffs.length === 0) return null;
-    const avgTimeDiff = timeDiffs.reduce((a, b) => a + b, 0) / timeDiffs.length;
-    return `${Math.floor(avgTimeDiff / 1000)} seconds`;
-  };
+
 
   return (
     <List
